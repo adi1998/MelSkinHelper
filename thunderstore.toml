@@ -6,8 +6,8 @@ schemaVersion = "0.0.1"
 namespace = "zerp"
 name = "MelSkinHelper"
 versionNumber = "0.0.1"
-description = "Hades II mod allowing you to select a dress for Melinoe from one of Arachne's boons and some custom skins. Includes updated portraits for each Arachne dress. Options to add favorites and randomize dress on run start"
-websiteUrl = "https://github.com/adi1998/MelSkin"
+description = "Helper mod for MelSkin. Does nothing on its own."
+websiteUrl = "https://github.com/adi1998/MelSkinHelper"
 containsNsfwContent = false
 
 [package.dependencies]
