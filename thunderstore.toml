@@ -5,7 +5,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "zerp"
 name = "MelSkinHelper"
-versionNumber = "0.0.1"
+versionNumber = "0.1.0"
 description = "Helper mod for MelSkin. Does nothing on its own."
 websiteUrl = "https://github.com/adi1998/MelSkinHelper"
 containsNsfwContent = false
@@ -47,3 +47,4 @@ communities = [ "hades-ii", ]
 
 [publish.categories]
 hades-ii = [ "mods", ]
+
