@@ -127,7 +127,7 @@ if args.arm:
 img = Image.open(atlas_path)
 
 for layer in modified_layers:
-    img = replace_pixels(img, layer)
+    img = Image.alpha_composite(img, layer)
 
 # new_hair.show()
 img.save(custom_path)
