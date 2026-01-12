@@ -123,7 +123,7 @@ if args.dress:
 if args.hair:
     modified_layers.append(gradient_map_hair(hair_path, args.hair))
 
-if args.arm:
+if args.arm != None:
     modified_layers.append(hue_shift(arm_path, args.arm))
 # shifted.save(dress_hue_path)
 
