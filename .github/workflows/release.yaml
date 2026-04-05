@@ -63,7 +63,7 @@ jobs:
         shell: pwsh
         run: |
           mkdir -force .\data
-          pyinstaller .\src\colormap.py  --distpath data -F
+          pyinstaller .\src\colormap.py  --distpath data -F --collect-data archspec
 
       - name: Add .NET tools to PATH
         shell: pwsh
