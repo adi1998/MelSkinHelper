@@ -92,6 +92,7 @@ def hue(hue_raw):
     return (int(hue_raw) + 360) % 360
 
 def create_texture_array(source_folder, prefix):
+    pkg_textures = []
     tex_list = os.listdir(source_folder)
 
     for tex in tex_list:
@@ -104,6 +105,7 @@ def create_texture_array(source_folder, prefix):
                 'fmt': 0x1C,
                 'mip_count': 6,
             })
+    return pkg_textures
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--path", type=str, required=True)
