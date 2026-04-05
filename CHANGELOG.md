@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+- use cg3h instead of deppth2 to fix mip levels not being created
+
 ## [0.1.0] - 2026-01-10
 
 - First version of the mod!
