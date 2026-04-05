@@ -3,7 +3,6 @@ import colorsys
 import sys
 import os
 import argparse
-import shutil
 import pkg_builder
 
 def hue_shift(image_path, hue_shift=50):
@@ -82,10 +81,8 @@ def gradient_map_hair(image_path, color):
     gmap = create_gradient([ (166,color[0],color[1],color[2])])
     return apply_gradient(image_path, gmap)
 
-def gradient_map_dress(image_path, color, bright=False):
+def gradient_map_dress(image_path, color):
     gmap = create_gradient([ (110,color[0],color[1],color[2]) ])
-    if bright:
-        gmap = create_gradient([ (130,color[0],color[1],color[2]) ])
     return apply_gradient(image_path, gmap)
 
 def rgb(string):
@@ -116,7 +113,7 @@ parser.add_argument("--base", type=str)
 parser.add_argument("--arm", type=hue)
 parser.add_argument("--bright", action="store_true")
 
-args, _ = parser.parse_known_args()
+args = parser.parse_args()
 input_folder = args.path
 atlas_path = os.path.join(input_folder,"None.png")
 if args.base != None:
@@ -132,7 +129,7 @@ custom_path = os.path.join(input_folder,"Custom/custom.png")
 modified_layers = []
 
 if args.dress:
-    modified_layers.append(gradient_map_dress(dress_path, args.dress, args.bright))
+    modified_layers.append(gradient_map_dress(dress_path, args.dress))
 
 if args.hair:
     modified_layers.append(gradient_map_hair(hair_path, args.hair))
@@ -151,18 +148,5 @@ img.save(custom_path)
 
 source_folder = os.path.join(input_folder, "Custom")
 target_folder = os.path.join(input_folder, "zerp-MelSkinCustom")
-texpack.build_atlases_hades(source_folder, target_folder)
+
 pkg_builder.build_standalone_pkg(create_texture_array(source_folder, "zerp-MelSkinCustom\\"), target_folder + ".pkg")
-
-img = img.resize((128,128))
-img.save(custom_path)
-
-source_folder = os.path.join(input_folder, "Custom")
-target_folder = os.path.join(input_folder, "Small", "zerp-MelSkinCustom")
-os.makedirs(os.path.join(input_folder, "Small"))
-texpack.build_atlases_hades(source_folder, target_folder)
-
-shutil.copy(os.path.join(input_folder, "Small", "zerp-MelSkinCustom.pkg"), os.path.join(input_folder, "zerp-MelSkinCustomSmall.pkg"))
-shutil.copy(os.path.join(input_folder, "Small", "zerp-MelSkinCustom.pkg_manifest"), os.path.join(input_folder, "zerp-MelSkinCustomSmall.pkg_manifest"))
-
-shutil.rmtree(os.path.join(input_folder, "Small"))
