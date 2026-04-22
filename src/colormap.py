@@ -3,7 +3,7 @@ import colorsys
 import sys
 import os
 import argparse
-import deppth2.texpacking as texpack
+import pkg_builder
 
 def hue_shift(image_path, hue_shift=50):
     with Image.open(image_path) as img:
@@ -91,6 +91,22 @@ def rgb(string):
 def hue(hue_raw):
     return (int(hue_raw) + 360) % 360
 
+def create_texture_array(source_folder, prefix):
+    pkg_textures = []
+    tex_list = os.listdir(source_folder)
+
+    for tex in tex_list:
+        if tex[-4:] == ".png":
+            pkg_textures.append({
+                'name':  prefix + tex[:-4],
+                'png_path': os.path.abspath(source_folder + "/" + tex),
+                'width': 512,
+                'height': 512,
+                'fmt': 0x1C,
+                'mip_count': 6,
+            })
+    return pkg_textures
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--path", type=str, required=True)
 parser.add_argument("--dress", type=rgb)
@@ -134,4 +150,5 @@ img.save(custom_path)
 
 source_folder = os.path.join(input_folder, "Custom")
 target_folder = os.path.join(input_folder, "zerp-MelSkinCustom")
-texpack.build_atlases_hades(source_folder, target_folder)
+
+pkg_builder.build_standalone_pkg(create_texture_array(source_folder, "zerp-MelSkinCustom\\"), target_folder + ".pkg")
